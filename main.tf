@@ -23,3 +23,10 @@ module "sg" {
   sg_private_subnets = module.vpc.private_subnets
   #depends_on = [ module.eks ]
 }
+
+module "ingress" {
+  source = "./ingress"
+  ingress_name = "ingress-nginx"
+  ingress_repo = "https://kubernetes.github.io/ingress-nginx"
+  depends_on = [ module.eks ]
+}
