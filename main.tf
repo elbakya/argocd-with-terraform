@@ -14,3 +14,12 @@ module "eks" {
   sg_id = module.sg.security_groups
   #depends_on = [ module.vpc ]
 }
+
+module "sg" {
+  source = "./sg"
+  sg_vpc_id = module.vpc.vpc_id
+  sg_cluster_name = module.eks.eks_cluster_name
+  sg_public_subnets = module.vpc.public_subnets
+  sg_private_subnets = module.vpc.private_subnets
+  #depends_on = [ module.eks ]
+}
