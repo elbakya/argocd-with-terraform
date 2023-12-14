@@ -30,3 +30,13 @@ module "ingress" {
   ingress_repo = "https://kubernetes.github.io/ingress-nginx"
   depends_on = [ module.eks ]
 }
+
+module "key_pair" {
+  source = "./key_pair"
+}
+
+module "argo" {
+  source = "./argocd"
+  argo_cluster_name = module.eks.eks_cluster_name
+  depends_on = [ module.eks ]
+}
