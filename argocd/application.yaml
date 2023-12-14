@@ -1,0 +1,17 @@
+applications:
+- name: brainscale-app
+  namespace: argocd
+  project: default
+  source:
+    repoURL: https://github.com/elbakya/argocd_application.git
+    targetRevision: HEAD
+    path: ./Chart-test
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: brainscale
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
